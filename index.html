@@ -1,115 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Bruhaspathi Astrology</title>
-  <link rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css" />
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(to bottom right, #0b0b14, #1e1e2e);
-      color: #fff;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
     }
+
     header {
-      text-align: center;
-      padding: 40px 20px;
-    }
-    header img {
-      max-width: 220px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    }
-    header h1 {
-      margin-top: 15px;
-      font-size: 2.2rem;
-      font-weight: bold;
-      background: linear-gradient(to right, #fbbf24, #f472b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .section {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 30px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      text-align: center;
-    }
-    .section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      color: #fcd34d;
-    }
-    .services img {
-      width: 100%;
-      max-width: 380px;
-      margin: 12px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(255,255,255,0.25);
-    }
-    .contact {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    .contact div {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(to right, #f472b6, #fbbf24);
-      color: #000;
-      font-weight: 600;
-      padding: 10px 18px;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease;
-      cursor: pointer;
-    }
-    .contact div:hover {
-      transform: scale(1.08);
-    }
-    footer {
-      text-align: center;
+      background: #6a1b9a;
+      color: white;
       padding: 15px;
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ede7f6;
+      padding: 30px 10px;
+    }
+
+    .hero img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      margin: 15px 0 10px;
+      color: #4a148c;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #444;
+    }
+
+    footer {
+      background: #4a148c;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/BaluAstro%20image%20in%20webpage.png" alt="Astrology">
     <h1>Bruhaspathi Astrology</h1>
-    <p>Traditional Telugu Astrology & Sacred Pooja Services</p>
+    <p>Traditional Telugu Astrology & Services</p>
   </header>
 
-  <section class="section services">
-    <h2>Telugu Pooja Services</h2>
-    <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Telugu%20Pooja%20Services_simple_compose_01k25pgw4vf55tdwcbttb5d1nq.png" alt="Service 1">
-    <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Telugu%20Pooja%20Services_simple_compose_02.png" alt="Service 2">
+  <section class="hero">
+    <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/BaluAstro%20image%20in%20webpage.png" alt="Astrology Main">
   </section>
 
-  <section class="section">
-    <h2>Contact Us</h2>
-    <div class="contact">
-      <div><i class="lucide lucide-phone"></i> +91 7893111403</div>
-      <div><i class="lucide lucide-mail"></i> dbalu89@gmail.com</div>
-      <div><i class="lucide lucide-calendar"></i> Book Appointment</div>
-      <div><i class="lucide lucide-book-open"></i> Astrology Guidance</div>
-      <div><i class="lucide lucide-send"></i> Send Query</div>
-      <div><i class="lucide lucide-shield"></i> Trusted Services</div>
+  <section class="services">
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Telugu%20Pooja%20Services_simple_compose_01k25pgw4vf55tdwcbttb5d1nq.png" alt="Pooja Services">
+      <h3>Telugu Pooja Services</h3>
+      <p>Complete pooja services explained in Telugu for homes and temples.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1542_Astrology%20Chart%20Services_simple_compose_01h25pgw4vf55tdwcbttb5d1nq.png" alt="Astrology Charts">
+      <h3>Astrology Charts</h3>
+      <p>Horoscope, marriage matching, and detailed kundali services.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1544_Auspicious%20Dates_simple_compose_01h25pgw4vf55tdwcbttb5d1nq.png" alt="Auspicious Dates">
+      <h3>Auspicious Dates</h3>
+      <p>Find the most auspicious dates for weddings, ceremonies, and events.</p>
     </div>
   </section>
 
   <footer>
-    © 2025 Bruhaspathi Astro Services | Maintained by Devulapalli Balachander Sharma
+    <p>&copy; 2025 Bruhaspathi Astrology. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
