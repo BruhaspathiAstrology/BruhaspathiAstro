@@ -14,45 +14,24 @@
 
   <!-- Babel -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-  <!-- Framer Motion + Lucide -->
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
-  <script src="https://unpkg.com/lucide-react/dist/lucide-react.umd.js"></script>
 </head>
 <body class="bg-[#0B0B14] text-white">
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState } = React;
-    const { motion, AnimatePresence } = window['framer-motion'];
-    const { ChevronDown } = lucideReact;
-
     function Navbar(){
-      const [open,setOpen] = useState(false);
       return (
-        <div className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10">
+        <div className="sticky top-0 z-50 bg-white/5 border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-            <a href="#top" className="font-extrabold tracking-wide text-white text-lg">BRUHASPATHI ASTRO</a>
-            <button className="sm:hidden" onClick={()=>setOpen(!open)}>
-              <ChevronDown className={`transition ${open?"rotate-180":""}`}/>
-            </button>
+            <a href="#top" className="font-extrabold tracking-wide text-white text-lg">
+              BRUHASPATHI ASTRO
+            </a>
             <nav className="hidden sm:flex gap-6 text-white/80">
               <a href="#hero" className="hover:text-white">Home</a>
               <a href="#services" className="hover:text-white">Services</a>
               <a href="#contact" className="hover:text-white">Contact</a>
             </nav>
           </div>
-          <AnimatePresence>
-            {open && (
-              <motion.div initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} className="sm:hidden px-4 pb-3">
-                <div className="flex flex-col gap-2 text-white/80">
-                  <a href="#hero">Home</a>
-                  <a href="#services">Services</a>
-                  <a href="#contact">Contact</a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       );
     }
