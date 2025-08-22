@@ -2,79 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bruhaspathi Astrology</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astrology Services</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
-
-    header {
-      background: #6a1b9a;
-      color: white;
-      padding: 15px;
+      background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+      color: #333;
       text-align: center;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
+    header {
+      padding: 20px;
+      background: #4a148c;
+      color: white;
     }
 
-    .hero {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #ede7f6;
-      padding: 30px 10px;
+    header img {
+      width: 150px;
+      border-radius: 50%;
     }
 
-    .hero img {
-      max-width: 90%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    h1 {
+      margin: 10px 0;
     }
 
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      padding: 30px;
+      padding: 20px;
     }
 
     .card {
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
     }
 
     .card img {
       width: 100%;
-      height: 160px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 8px;
     }
 
     .card h3 {
-      margin: 15px 0 10px;
+      margin: 10px 0;
       color: #4a148c;
     }
 
     .card p {
+      padding: 0 15px 15px;
       font-size: 14px;
-      color: #444;
     }
 
     footer {
       background: #4a148c;
       color: white;
-      text-align: center;
-      padding: 12px;
+      padding: 10px;
       margin-top: 20px;
     }
   </style>
@@ -82,36 +74,33 @@
 <body>
 
   <header>
-    <h1>Bruhaspathi Astrology</h1>
-    <p>Traditional Telugu Astrology & Services</p>
+    <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/BaluAstro%20image%20in%20webpage.png" alt="Astrologer">
+    <h1>Astrology & Pooja Services</h1>
+    <p>Guidance through the stars, rituals, and traditions</p>
   </header>
-
-  <section class="hero">
-    <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/BaluAstro%20image%20in%20webpage.png" alt="Astrology Main">
-  </section>
 
   <section class="services">
     <div class="card">
-      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Telugu%20Pooja%20Services_simple_compose_01k25pgw4vf55tdwcbttb5d1nq.png" alt="Pooja Services">
+      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Telugu%20Pooja%20Services_simple_compose_01k25pgw4vf55tdwcbttb5d1nq.png" alt="Pooja">
       <h3>Telugu Pooja Services</h3>
-      <p>Complete pooja services explained in Telugu for homes and temples.</p>
+      <p>Complete rituals for all occasions performed authentically in Telugu tradition.</p>
     </div>
 
     <div class="card">
-      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1542_Astrology%20Chart%20Services_simple_compose_01h25pgw4vf55tdwcbttb5d1nq.png" alt="Astrology Charts">
-      <h3>Astrology Charts</h3>
-      <p>Horoscope, marriage matching, and detailed kundali services.</p>
+      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Telugu%20Astrology%20Services_simple_compose_01hf7wjecc2xh1dkvrx3acmc3r.png" alt="Astrology">
+      <h3>Astrology Readings</h3>
+      <p>Personal horoscope readings and guidance for health, career, and relationships.</p>
     </div>
 
     <div class="card">
-      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1544_Auspicious%20Dates_simple_compose_01h25pgw4vf55tdwcbttb5d1nq.png" alt="Auspicious Dates">
-      <h3>Auspicious Dates</h3>
-      <p>Find the most auspicious dates for weddings, ceremonies, and events.</p>
+      <img src="https://raw.githubusercontent.com/BruhaspathiAstrology/BruhaspathiAstrology/main/20250808_1540_Auspicious%20Day%20Services_simple_compose_01jhdn0x6hzsnhh0dnwqtdwxms.png" alt="Auspicious Days">
+      <h3>Auspicious Days</h3>
+      <p>Get the right dates for marriage, business, and important events.</p>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Bruhaspathi Astrology. All rights reserved.</p>
+    <p>© 2025 Bruhaspathi Astrology. All rights reserved.</p>
   </footer>
 
 </body>
