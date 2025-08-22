@@ -4,34 +4,227 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bruhaspathi Astro</title>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- React + ReactDOM -->
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <!-- Babel (to support JSX) -->
+
+  <!-- Babel (so JSX works in browser) -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Framer Motion + Lucide Icons -->
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+  <script src="https://unpkg.com/lucide-react/dist/lucide-react.umd.js"></script>
 </head>
 <body class="bg-[#0B0B14] text-white">
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState } = React;
 
+    // ==============================
+    // React + Libraries
+    // ==============================
+    const { useState, useEffect, useMemo } = React;
+    const { motion, AnimatePresence } = window['framer-motion'];
+    const { ChevronDown, Phone, Mail, Calendar, BookOpen, Send, Lock, Shield } = lucideReact;
+
+    // ==============================
+    // MAIN APP
+    // ==============================
     function App(){
-      const [count,setCount] = useState(0);
+      const DEMO_USER = "astro";
+      const DEMO_PASS = "bruhaspathi";
+      const STORAGE_KEY = "astro_auth_v2";
+      const FORCE_LOGIN = true;
+
+      const [authed,setAuthed] = useState(false);
+
+      useEffect(()=>{
+        try{
+          if(FORCE_LOGIN){ sessionStorage.removeItem(STORAGE_KEY); }
+          const flag = sessionStorage.getItem(STORAGE_KEY) === '1';
+          setAuthed(!!flag);
+        }catch{ setAuthed(false); }
+      },[]);
+
+      function handleLogin(u,p){
+        if(u===DEMO_USER && p===DEMO_PASS){
+          sessionStorage.setItem(STORAGE_KEY,'1');
+          setAuthed(true);
+        } else {
+          alert("Invalid credentials");
+        }
+      }
+
+      function logout(){ sessionStorage.removeItem(STORAGE_KEY); setAuthed(false); }
+
       return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold mb-4">Bruhaspathi Astro</h1>
-          <p className="mb-6 text-white/70">Demo page running on GitHub Pages</p>
-          <button onClick={()=>setCount(count+1)}
-            className="px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-amber-500 rounded-lg font-semibold">
-            You clicked {count} times
-          </button>
+        <div className="min-h-screen w-full bg-[#0B0B14] text-white overflow-x-hidden">
+          <Navbar authed={authed} logout={logout}/>
+          <Hero/>
+          <Section id="tools" title="Interactive Tools" subtitle="Sign in to access Panchangam, Ashtakoot score, and star compatibility.">
+            {authed ? <ToolsGrid/> : <LoginPanel onLogin={handleLogin}/>}      
+          </Section>
+          <FancyDivider/>
+          <Section id="services" title="Pooja and Ceremony Services" subtitle="Open a service to see details, checklists, and request form.">
+            <ServicesAccordion/>
+          </Section>
+          <FancyDivider/>
+          <YantraSection/>
+          <Contact/>
+          <FloatingActions/>
+          <Footer/>
         </div>
       );
     }
 
+    // ==============================
+    // COMPONENTS
+    // ==============================
+    function Navbar({authed,logout}){
+      const [open,setOpen]=useState(false);
+      return (
+        <div className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <a href="#top" className="font-extrabold tracking-wide text-white text-lg">BRUHASPATHI ASTRO</a>
+            <div className="flex items-center gap-4">
+              {authed ? (
+                <button onClick={logout} className="hidden sm:inline px-3 py-1.5 rounded-lg border border-white/20 text-sm">Lock tools</button>
+              ) : null}
+              <button aria-label="menu" className="sm:hidden" onClick={()=>setOpen(v=>!v)}>
+                <ChevronDown className={`transition ${open?"rotate-180":""}`}/>
+              </button>
+            </div>
+            <nav className="hidden sm:flex gap-6 text-white/80">
+              <a href="#tools" className="hover:text-white">Tools</a>
+              <a href="#services" className="hover:text-white">Services</a>
+              <a href="#yantras" className="hover:text-white">Yantras</a>
+              <a href="#contact" className="hover:text-white">Contact</a>
+            </nav>
+          </div>
+          <AnimatePresence>
+            {open&&(
+              <motion.nav initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} className="sm:hidden px-4 pb-3">
+                <div className="flex flex-col gap-2 text-white/80">
+                  <a onClick={()=>setOpen(false)} href="#tools">Tools</a>
+                  <a onClick={()=>setOpen(false)} href="#services">Services</a>
+                  <a onClick={()=>setOpen(false)} href="#yantras">Yantras</a>
+                  <a onClick={()=>setOpen(false)} href="#contact">Contact</a>
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+    }
+
+    function Hero(){
+      return (
+        <header className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center">
+          <h1 className="mt-4 text-5xl sm:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-100 to-white">
+            Bruhaspathi Astro & Vedic Services
+          </h1>
+          <p className="mt-4 text-white/90 max-w-2xl mx-auto">
+            Professional Vedic astrology and pooja services for families and events.
+          </p>
+        </header>
+      );
+    }
+
+    function Section({id,title,subtitle,children}){
+      return (
+        <section id={id} className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12">
+          <motion.h2 initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-3xl sm:text-4xl font-extrabold mb-2">{title}</motion.h2>
+          {subtitle && (<p className="text-white/80 mb-8 max-w-3xl">{subtitle}</p>)}
+          {children}
+        </section>
+      );
+    }
+
+    function FancyDivider(){ return (<div className="relative max-w-7xl mx-auto px-4 sm:px-6"><div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"/></div>); }
+
+    function LoginPanel({onLogin}){
+      const [u,setU]=useState("");
+      const [p,setP]=useState("");
+      return (
+        <form onSubmit={(e)=>{e.preventDefault(); onLogin(u,p);}}
+          className="bg-white/5 border border-white/15 rounded-2xl p-6 max-w-md mx-auto">
+          <h2 className="flex items-center gap-2 font-bold text-xl mb-2"><Lock size={18}/> Restricted Tools</h2>
+          <input value={u} onChange={e=>setU(e.target.value)} placeholder="Username"
+                 className="w-full mb-2 bg-white/10 border border-white/20 rounded px-3 py-2"/>
+          <input value={p} onChange={e=>setP(e.target.value)} placeholder="Password" type="password"
+                 className="w-full mb-2 bg-white/10 border border-white/20 rounded px-3 py-2"/>
+          <button className="w-full px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-fuchsia-600 to-amber-500">Sign in</button>
+          <p className="text-xs mt-2 text-white/70">Demo → user: astro | pass: bruhaspathi</p>
+        </form>
+      );
+    }
+
+    function ToolsGrid(){
+      return (
+        <div className="text-white/80">🔧 Tools would be here (Panchangam, Ashtakoot, etc.) – trimmed for demo</div>
+      );
+    }
+
+    function ServicesAccordion(){
+      return (
+        <div className="space-y-4">
+          <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+            <h3 className="font-semibold">Marriage Services</h3>
+            <p className="text-white/70 text-sm">End-to-end ceremonies, muhurtham selection, checklists.</p>
+          </div>
+          <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+            <h3 className="font-semibold">Gruha Pravesham</h3>
+            <p className="text-white/70 text-sm">Vaastu Shanti, Kalasha sthapana and homam to bless the home.</p>
+          </div>
+        </div>
+      );
+    }
+
+    function YantraSection(){
+      return (
+        <section id="yantras" className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-2">Energised Yantras</h2>
+          <p className="text-white/80">Yantras are copper plates etched with sacred geometry, energised with mantras and Abhishekas.</p>
+        </section>
+      );
+    }
+
+    function Contact(){
+      return (
+        <section id="contact" className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12">
+          <h3 className="text-3xl font-extrabold">Contact</h3>
+          <p className="mt-2 text-white/80">Mobile: +91 7893111403 | Email: dbalu89@gmail.com</p>
+        </section>
+      );
+    }
+
+    function Footer(){
+      return (
+        <footer className="mt-6 border-t border-white/10 bg-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 text-white/80 text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div>© {new Date().getFullYear()} Bruhaspathi Astro Services</div>
+            <div>Maintained by Devulapalli Balachander Sharma</div>
+          </div>
+        </footer>
+      );
+    }
+
+    function FloatingActions(){
+      return (
+        <div className="fixed right-4 bottom-4 z-50 flex flex-col gap-3">
+          <a href="tel:+917893111403" className="w-14 h-14 rounded-full bg-emerald-600 shadow-xl flex items-center justify-center hover:brightness-110"><Phone/></a>
+          <a href="mailto:dbalu89@gmail.com" className="w-14 h-14 rounded-full bg-rose-600 shadow-xl flex items-center justify-center hover:brightness-110"><Mail/></a>
+        </div>
+      );
+    }
+
+    // ==============================
+    // MOUNT APP
+    // ==============================
     ReactDOM.createRoot(document.getElementById("root")).render(<App />);
   </script>
 </body>
